@@ -18,12 +18,12 @@ import androidx.core.content.ContextCompat
 import com.example.flexibleadapterstickyheaderexample.R
 import com.example.flexibleadapterstickyheaderexample.adapter.items.SimpleHeaderItem
 import com.example.flexibleadapterstickyheaderexample.adapter.items.SimpleItem
-import com.example.flexibleadapterstickyheaderexample.manager.FlexibleFlexBoxLayoutManager
+import com.example.flexibleadapterstickyheaderexample.manager.FLMFlowLayoutManager
+import com.example.flexibleadapterstickyheaderexample.manager.FlexibleFlowLayoutManager
 import com.example.flexibleadapterstickyheaderexample.utils.MenuColorize
-import com.google.android.flexbox.FlexDirection
-import com.google.android.flexbox.FlexWrap
 import com.google.android.material.appbar.AppBarLayout
 import eu.davidea.flexibleadapter.FlexibleAdapter
+import eu.davidea.flexibleadapter.common.SmoothScrollLinearLayoutManager
 import eu.davidea.flexibleadapter.items.IFlexible
 import eu.davidea.flexibleadapter.items.IHeader
 import kotlinx.android.synthetic.main.activity_main.*
@@ -44,18 +44,13 @@ class MainActivity : AppCompatActivity(),
         setContentView(R.layout.activity_main)
         initActionBar()
         adapter = FlexibleAdapter(getExampleItems(), this, true)
-        recycler_view.layoutManager = FlexibleFlexBoxLayoutManager(this, FlexDirection.ROW, FlexWrap.WRAP)
+        recycler_view.layoutManager = FlexibleFlowLayoutManager(FLMFlowLayoutManager.VERTICAL)
 //        recycler_view.layoutManager = SmoothScrollLinearLayoutManager(this)
         recycler_view.adapter = adapter
         recycler_view.setHasFixedSize(true)
         adapter
                 .setDisplayHeadersAtStartUp(true)
                 .setStickyHeaders(true)
-        //FIXME: This code will fix the error displayed after filtering the Items.
-/*        adapter.addListener(FlexibleAdapter.OnFilterListener {
-            Log.d(tag, "onUpdateFilterView")
-            adapter.notifyDataSetChanged()
-        })*/
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {

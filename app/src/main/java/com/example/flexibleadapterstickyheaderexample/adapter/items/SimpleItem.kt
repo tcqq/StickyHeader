@@ -4,6 +4,7 @@ import android.view.View
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.flexibleadapterstickyheaderexample.R
+import com.google.android.material.chip.Chip
 import eu.davidea.flexibleadapter.FlexibleAdapter
 import eu.davidea.flexibleadapter.items.AbstractFlexibleItem
 import eu.davidea.flexibleadapter.items.IFilterable
@@ -56,6 +57,6 @@ data class SimpleItem(val id: String,
     }
 
     class ViewHolder(view: View, adapter: FlexibleAdapter<*>) : FlexibleViewHolder(view, adapter) {
-        var text: AppCompatTextView = view.findViewById(R.id.text)
+        var text: Chip = view.findViewById(R.id.text)
     }
 }
