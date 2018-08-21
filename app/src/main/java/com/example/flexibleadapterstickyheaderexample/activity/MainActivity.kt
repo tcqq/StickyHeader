@@ -43,7 +43,6 @@ class MainActivity : AppCompatActivity(),
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         initActionBar()
-
         adapter = FlexibleAdapter(getExampleItems(), this, true)
         recycler_view.layoutManager = FlexibleFlexBoxLayoutManager(this, FlexDirection.ROW, FlexWrap.WRAP)
 //        recycler_view.layoutManager = SmoothScrollLinearLayoutManager(this)
@@ -52,6 +51,11 @@ class MainActivity : AppCompatActivity(),
         adapter
                 .setDisplayHeadersAtStartUp(true)
                 .setStickyHeaders(true)
+        //FIXME: This code will fix the error displayed after filtering the Items.
+/*        adapter.addListener(FlexibleAdapter.OnFilterListener {
+            Log.d(tag, "onUpdateFilterView")
+            adapter.notifyDataSetChanged()
+        })*/
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -69,11 +73,6 @@ class MainActivity : AppCompatActivity(),
         if (adapter.hasNewFilter(newText)) {
             adapter.setFilter(newText)
             adapter.filterItems()
-
-            // FIXME: If add this code, the search bug will be fixed.
-/*            Handler().postDelayed({
-                adapter.notifyDataSetChanged()
-            }, 50)*/
         }
         return true
     }
