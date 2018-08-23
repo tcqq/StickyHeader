@@ -9,7 +9,6 @@ import eu.davidea.flexibleadapter.FlexibleAdapter
 import eu.davidea.flexibleadapter.items.AbstractFlexibleItem
 import eu.davidea.flexibleadapter.items.IFilterable
 import eu.davidea.flexibleadapter.items.IFlexible
-import eu.davidea.flexibleadapter.items.ISectionable
 import eu.davidea.flexibleadapter.utils.FlexibleUtils
 import eu.davidea.viewholders.FlexibleViewHolder
 
@@ -18,18 +17,8 @@ import eu.davidea.viewholders.FlexibleViewHolder
  * @since 08/13/2018 Created
  */
 data class SimpleItem(val id: String,
-                      val text: String,
-                      var headerItem: SimpleHeaderItem) : AbstractFlexibleItem<SimpleItem.ViewHolder>(),
-        ISectionable<SimpleItem.ViewHolder, SimpleHeaderItem>,
+                      val text: String) : AbstractFlexibleItem<SimpleItem.ViewHolder>(),
         IFilterable<String> {
-
-    override fun setHeader(header: SimpleHeaderItem) {
-        this.headerItem = header
-    }
-
-    override fun getHeader(): SimpleHeaderItem {
-        return headerItem
-    }
 
     override fun getLayoutRes(): Int {
         return R.layout.item_simple
@@ -57,6 +46,6 @@ data class SimpleItem(val id: String,
     }
 
     class ViewHolder(view: View, adapter: FlexibleAdapter<*>) : FlexibleViewHolder(view, adapter) {
-        var text: Chip = view.findViewById(R.id.text)
+        var text: AppCompatTextView = view.findViewById(R.id.text)
     }
 }

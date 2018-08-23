@@ -5,7 +5,6 @@ import android.graphics.Color
 import android.graphics.PorterDuff
 import android.os.Bundle
 import android.text.InputType
-import android.util.Log
 import android.view.Menu
 import android.view.View
 import android.view.inputmethod.EditorInfo
@@ -18,19 +17,17 @@ import androidx.core.content.ContextCompat
 import com.example.flexibleadapterstickyheaderexample.R
 import com.example.flexibleadapterstickyheaderexample.adapter.items.SimpleHeaderItem
 import com.example.flexibleadapterstickyheaderexample.adapter.items.SimpleItem
-import com.example.flexibleadapterstickyheaderexample.manager.FLMFlowLayoutManager
-import com.example.flexibleadapterstickyheaderexample.manager.FlexibleFlowLayoutManager
 import com.example.flexibleadapterstickyheaderexample.utils.MenuColorize
 import com.google.android.material.appbar.AppBarLayout
 import eu.davidea.flexibleadapter.FlexibleAdapter
 import eu.davidea.flexibleadapter.common.SmoothScrollLinearLayoutManager
 import eu.davidea.flexibleadapter.items.IFlexible
-import eu.davidea.flexibleadapter.items.IHeader
 import kotlinx.android.synthetic.main.activity_main.*
 import java.util.*
 
 class MainActivity : AppCompatActivity(),
-        SearchView.OnQueryTextListener {
+        SearchView.OnQueryTextListener,
+        FlexibleAdapter.OnItemClickListener {
 
     private val tag = "MainActivity"
 
@@ -44,13 +41,32 @@ class MainActivity : AppCompatActivity(),
         setContentView(R.layout.activity_main)
         initActionBar()
         adapter = FlexibleAdapter(getExampleItems(), this, true)
-        recycler_view.layoutManager = FlexibleFlowLayoutManager(FLMFlowLayoutManager.VERTICAL)
-//        recycler_view.layoutManager = SmoothScrollLinearLayoutManager(this)
+        adapter
+                .expandItemsAtStartUp()
+                .setAutoCollapseOnExpand(false)
+                .isAutoScrollOnExpand = true
+        recycler_view.layoutManager = SmoothScrollLinearLayoutManager(this)
         recycler_view.adapter = adapter
         recycler_view.setHasFixedSize(true)
         adapter
                 .setDisplayHeadersAtStartUp(true)
                 .setStickyHeaders(true)
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        adapter.onSaveInstanceState(outState)
+        super.onSaveInstanceState(outState)
+    }
+
+    override fun onRestoreInstanceState(savedInstanceState: Bundle?) {
+        super.onRestoreInstanceState(savedInstanceState)
+        if (savedInstanceState != null) {
+            adapter.onRestoreInstanceState(savedInstanceState)
+        }
+    }
+
+    override fun onItemClick(view: View?, position: Int): Boolean {
+        return false
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -130,54 +146,21 @@ class MainActivity : AppCompatActivity(),
     }
 
     private fun getExampleItems(): List<IFlexible<*>> {
+        val size = 20
         val items = ArrayList<IFlexible<*>>()
-        var lastHeaderId = 0
-        val size = 400
-        val headers = 30
-        var header: SimpleHeaderItem? = null
-
         for (i in 0 until size) {
-            header = if (i % Math.round((size / headers).toFloat()) == 0) newHeader(++lastHeaderId) else header
-            items.add(newSimpleItem(i + 1, header))
-            Log.d(tag, "HEADER: $header")
-            Log.d(tag, "SIMPLE_ITEM: " + newSimpleItem(i + 1, header))
+            items.add(newItem(i + 1))
         }
         return items
     }
 
-    /*
-     * Creates a Header item.
-     */
-    private fun newHeader(i: Int): SimpleHeaderItem {
-        return SimpleHeaderItem("H$i", "Header $i")
+    private fun newItem(i: Int): SimpleHeaderItem {
+        val headers = 5
+        val headerItem = SimpleHeaderItem("H$i", "Header $i")
+        for (j in 1..headers) {
+            val subItem = SimpleItem(headerItem.id + "-SB" + j, "Sub Item $j")
+            headerItem.addSubItem(subItem)
+        }
+        return headerItem
     }
-
-    /*
-     * Creates a normal item with a Header linked.
-     */
-    private fun newSimpleItem(i: Int, header: IHeader<*>?): SimpleItem {
-        return SimpleItem("I$i", "Simple Item $i", header as SimpleHeaderItem)
-    }
-
-
-    /*        val header1: SimpleHeaderItem? = newHeader(1)
-        val header2: SimpleHeaderItem? = newHeader(2)
-
-        items.add(newSimpleItem(1, header1))
-        items.add(newSimpleItem(2, header1))
-        items.add(newSimpleItem(3, header2))
-        items.add(newSimpleItem(4, header2))
-        items.add(newSimpleItem(5, header2))
-        items.add(newSimpleItem(6, header2))
-        items.add(newSimpleItem(7, header2))
-        items.add(newSimpleItem(8, header2))
-        items.add(newSimpleItem(9, header2))
-        items.add(newSimpleItem(9, header2))
-        items.add(newSimpleItem(9, header2))
-        items.add(newSimpleItem(10, header2))
-        items.add(newSimpleItem(11, header2))
-        items.add(newSimpleItem(12, header2))
-        items.add(newSimpleItem(13, header2))
-        items.add(newSimpleItem(14, header2))
-        items.add(newSimpleItem(15, header2))*/
 }

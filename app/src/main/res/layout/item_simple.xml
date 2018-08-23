@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.material.chip.Chip xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.appcompat.widget.AppCompatTextView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/text"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    tools:text="Example skills" />
+    android:layout_width="match_parent"
+    android:layout_height="56dp"
+    android:background="?attr/selectableItemBackground"
+    android:gravity="center_vertical"
+    android:paddingStart="72dp"
+    android:paddingEnd="16dp"
+    android:textAppearance="?attr/textAppearanceBody1"
+    tools:text="Sub skill name" />
