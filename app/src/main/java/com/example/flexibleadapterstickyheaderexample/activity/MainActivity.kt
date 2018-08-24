@@ -29,8 +29,6 @@ class MainActivity : AppCompatActivity(),
         SearchView.OnQueryTextListener,
         FlexibleAdapter.OnItemClickListener {
 
-    private val tag = "MainActivity"
-
     private lateinit var adapter: FlexibleAdapter<IFlexible<*>>
     private lateinit var searchView: SearchView
 
@@ -158,7 +156,7 @@ class MainActivity : AppCompatActivity(),
         val headers = 5
         val headerItem = SimpleHeaderItem("H$i", "Header $i")
         for (j in 1..headers) {
-            val subItem = SimpleItem(headerItem.id + "-SB" + j, "Sub Item $j")
+            val subItem = SimpleItem(headerItem.id + "-SB" + j, "Sub Item $j", j == headers)
             headerItem.addSubItem(subItem)
         }
         return headerItem

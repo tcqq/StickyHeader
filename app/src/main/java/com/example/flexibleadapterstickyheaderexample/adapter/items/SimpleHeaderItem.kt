@@ -1,7 +1,6 @@
 package com.example.flexibleadapterstickyheaderexample.adapter.items
 
 import android.content.Context
-import android.util.Log
 import android.util.TypedValue
 import android.view.View
 import android.widget.LinearLayout
@@ -14,6 +13,8 @@ import eu.davidea.flexibleadapter.FlexibleAdapter
 import eu.davidea.flexibleadapter.items.*
 import eu.davidea.flexibleadapter.utils.DrawableUtils
 import eu.davidea.viewholders.ExpandableViewHolder
+import kotlinx.android.synthetic.main.item_simple_header.view.*
+import timber.log.Timber
 import java.util.*
 
 /**
@@ -66,7 +67,7 @@ data class SimpleHeaderItem(val id: String,
 
     override fun bindViewHolder(adapter: FlexibleAdapter<IFlexible<RecyclerView.ViewHolder>>, holder: ViewHolder, position: Int, payloads: MutableList<Any>) {
         if (payloads.size > 0) {
-            Log.d(this.javaClass.simpleName, "HeaderItem $text Payload $payloads")
+            Timber.d("HeaderItem $text Payload $payloads")
         } else {
             val context = holder.itemView.context
             holder.text.text = text
@@ -77,6 +78,13 @@ data class SimpleHeaderItem(val id: String,
                     0,
                     DrawableUtils.getColorControlHighlight(context))
             DrawableUtils.setBackgroundCompat(holder.root, drawable)
+        }
+        if (isExpanded) {
+            holder.divider.visibility = View.VISIBLE
+            holder.actionIcon.setImageResource(R.drawable.ic_keyboard_arrow_up_black_24dp)
+        } else {
+            holder.divider.visibility = View.INVISIBLE
+            holder.actionIcon.setImageResource(R.drawable.ic_keyboard_arrow_down_black_24dp)
         }
     }
 
@@ -92,9 +100,14 @@ data class SimpleHeaderItem(val id: String,
     }
 
     class ViewHolder(view: View, adapter: FlexibleAdapter<*>) : ExpandableViewHolder(view, adapter, true) {
-        var skillIcon: AppCompatImageView = view.findViewById(R.id.skill_icon)
-        var text: AppCompatTextView = view.findViewById(R.id.text)
-        var actionIcon: AppCompatImageView = view.findViewById(R.id.action_icon)
-        var root: LinearLayout = view.findViewById(R.id.root)
+        var skillIcon: AppCompatImageView = view.skill_icon
+        var text: AppCompatTextView = view.text
+        var actionIcon: AppCompatImageView = view.action_icon
+        var root: LinearLayout = view.root
+        var divider: View = view.divider
+
+        override fun shouldNotifyParentOnClick(): Boolean {
+            return true
+        }
     }
 }
