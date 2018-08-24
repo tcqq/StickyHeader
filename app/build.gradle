@@ -46,10 +46,14 @@ dependencies {
     implementation 'androidx.constraintlayout:constraintlayout:1.1.2'
 
     //FlexibleAdapter - https://github.com/davideas/FlexibleAdapter
-    implementation 'eu.davidea:flexible-adapter:5.0.5'
+    implementation 'com.tcqq:flexible-adapter:5.0.5'
+    implementation 'com.tcqq:flexible-adapter-ui:1.0.0-b5'
+    implementation 'com.tcqq:flexible-adapter-livedata:1.0.0-b2'
+    implementation 'com.tcqq:flexible-adapter-databinding:1.0.0-b3'
+/*    implementation 'eu.davidea:flexible-adapter:5.0.5'
     implementation 'eu.davidea:flexible-adapter-ui:1.0.0-b5'
     implementation 'eu.davidea:flexible-adapter-livedata:1.0.0-b2'
-    implementation 'eu.davidea:flexible-adapter-databinding:1.0.0-b3'
+    implementation 'eu.davidea:flexible-adapter-databinding:1.0.0-b3'*/
 
     implementation 'com.jakewharton.timber:timber:4.7.1'
 }

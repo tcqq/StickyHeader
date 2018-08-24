@@ -34,7 +34,7 @@ data class SimpleHeaderItem(val id: String,
     private var subItems: MutableList<SimpleItem> = ArrayList()
 
     init {
-        isExpanded = true//Open collapsed by default
+        isExpanded = false//Close collapsed by default
     }
 
     override fun isExpanded(): Boolean {
