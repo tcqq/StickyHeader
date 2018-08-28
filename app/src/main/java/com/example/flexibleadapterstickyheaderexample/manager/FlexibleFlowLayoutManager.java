@@ -2,6 +2,10 @@ package com.example.flexibleadapterstickyheaderexample.manager;
 
 import eu.davidea.flexibleadapter.common.IFlexibleLayoutManager;
 
+/**
+ * @author Alan Dreamer
+ * @since 28/08/2018 Created
+ */
 public class FlexibleFlowLayoutManager extends FLMFlowLayoutManager implements IFlexibleLayoutManager {
 
     public FlexibleFlowLayoutManager(int orientation) {
