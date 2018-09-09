@@ -159,26 +159,4 @@ class MainActivity : AppCompatActivity(),
     private fun newSimpleItem(i: Int, header: IHeader<*>?): SimpleItem {
         return SimpleItem("I$i", "Simple Item $i", header as SimpleHeaderItem)
     }
-
-
-    /*        val header1: SimpleHeaderItem? = newHeader(1)
-        val header2: SimpleHeaderItem? = newHeader(2)
-
-        items.add(newSimpleItem(1, header1))
-        items.add(newSimpleItem(2, header1))
-        items.add(newSimpleItem(3, header2))
-        items.add(newSimpleItem(4, header2))
-        items.add(newSimpleItem(5, header2))
-        items.add(newSimpleItem(6, header2))
-        items.add(newSimpleItem(7, header2))
-        items.add(newSimpleItem(8, header2))
-        items.add(newSimpleItem(9, header2))
-        items.add(newSimpleItem(9, header2))
-        items.add(newSimpleItem(9, header2))
-        items.add(newSimpleItem(10, header2))
-        items.add(newSimpleItem(11, header2))
-        items.add(newSimpleItem(12, header2))
-        items.add(newSimpleItem(13, header2))
-        items.add(newSimpleItem(14, header2))
-        items.add(newSimpleItem(15, header2))*/
 }
