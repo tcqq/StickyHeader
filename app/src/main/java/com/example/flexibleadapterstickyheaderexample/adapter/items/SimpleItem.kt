@@ -34,10 +34,6 @@ data class SimpleItem(val id: String,
             FlexibleUtils.highlightWords(holder.text, text, adapter.getFilter(String::class.java))
         } else {
             holder.text.text = text
-            holder.divider.visibility = isLastItemFromGroup.let {
-                if (it) View.VISIBLE
-                else View.INVISIBLE
-            }
         }
     }
 
@@ -52,6 +48,5 @@ data class SimpleItem(val id: String,
 
     class ViewHolder(view: View, adapter: FlexibleAdapter<*>) : FlexibleViewHolder(view, adapter) {
         var text: AppCompatTextView = view.text
-        var divider: View = view.divider
     }
 }

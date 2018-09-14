@@ -80,10 +80,8 @@ data class SimpleHeaderItem(val id: String,
             DrawableUtils.setBackgroundCompat(holder.root, drawable)
         }
         if (isExpanded) {
-            holder.divider.visibility = View.VISIBLE
             holder.actionIcon.setImageResource(R.drawable.ic_keyboard_arrow_up_black_24dp)
         } else {
-            holder.divider.visibility = View.INVISIBLE
             holder.actionIcon.setImageResource(R.drawable.ic_keyboard_arrow_down_black_24dp)
         }
     }
@@ -104,7 +102,6 @@ data class SimpleHeaderItem(val id: String,
         var text: AppCompatTextView = view.text
         var actionIcon: AppCompatImageView = view.action_icon
         var root: LinearLayout = view.root
-        var divider: View = view.divider
 
         override fun shouldNotifyParentOnClick(): Boolean {
             return true
