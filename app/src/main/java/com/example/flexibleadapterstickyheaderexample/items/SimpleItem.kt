@@ -1,4 +1,4 @@
-package com.example.flexibleadapterstickyheaderexample.adapter.items
+package com.example.flexibleadapterstickyheaderexample.items
 
 import android.view.View
 import androidx.appcompat.widget.AppCompatTextView

@@ -15,9 +15,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.core.content.ContextCompat
 import com.example.flexibleadapterstickyheaderexample.R
-import com.example.flexibleadapterstickyheaderexample.adapter.items.SimpleHeaderItem
-import com.example.flexibleadapterstickyheaderexample.adapter.items.SimpleItem
+import com.example.flexibleadapterstickyheaderexample.items.SimpleHeaderItem
+import com.example.flexibleadapterstickyheaderexample.items.SimpleItem
 import com.example.flexibleadapterstickyheaderexample.utils.MenuColorize
+import com.example.flexibleadapterstickyheaderexample.utils.ThemeUtils
 import com.google.android.material.appbar.AppBarLayout
 import eu.davidea.flexibleadapter.FlexibleAdapter
 import eu.davidea.flexibleadapter.common.SmoothScrollLinearLayoutManager
@@ -40,7 +41,6 @@ class MainActivity : AppCompatActivity(),
         initActionBar()
         adapter = FlexibleAdapter(getExampleItems(), this, true)
         adapter
-                .expandItemsAtStartUp()
                 .setAutoCollapseOnExpand(false)
                 .isAutoScrollOnExpand = true
         recycler_view.layoutManager = SmoothScrollLinearLayoutManager(this)
@@ -51,19 +51,22 @@ class MainActivity : AppCompatActivity(),
                 .setStickyHeaders(true)
     }
 
-    override fun onSaveInstanceState(outState: Bundle) {
-        adapter.onSaveInstanceState(outState)
-        super.onSaveInstanceState(outState)
-    }
-
-    override fun onRestoreInstanceState(savedInstanceState: Bundle?) {
-        super.onRestoreInstanceState(savedInstanceState)
-        if (savedInstanceState != null) {
-            adapter.onRestoreInstanceState(savedInstanceState)
-        }
-    }
-
     override fun onItemClick(view: View?, position: Int): Boolean {
+        if (adapter.getItem(position) is SimpleHeaderItem) {
+            val viewHolder = recycler_view.findViewHolderForAdapterPosition(position) as SimpleHeaderItem.ViewHolder
+            viewHolder.apply {
+                val context = itemView.context
+                if (adapter.isExpanded(position)) {
+                    actionIcon.setImageResource(R.drawable.ic_keyboard_arrow_up_black_24dp)
+                    skillIcon.setColorFilter(ThemeUtils.getThemeValue(R.attr.colorSecondary, context), PorterDuff.Mode.SRC_IN)
+                    text.setTextColor(ThemeUtils.getThemeValue(R.attr.colorSecondary, context))
+                } else {
+                    actionIcon.setImageResource(R.drawable.ic_keyboard_arrow_down_black_24dp)
+                    skillIcon.setColorFilter(ContextCompat.getColor(context, R.color.secondary_color), PorterDuff.Mode.SRC_IN)
+                    text.setTextColor(ThemeUtils.getPrimaryTextColor(context))
+                }
+            }
+        }
         return false
     }
 
@@ -96,10 +99,10 @@ class MainActivity : AppCompatActivity(),
 
     private fun initActionBar() {
         setSupportActionBar(toolbar)
-        supportActionBar?.let {
-            it.setDisplayHomeAsUpEnabled(true)
-            it.setHomeButtonEnabled(true)
-            it.title = "Choose skills"
+        supportActionBar?.apply {
+            setDisplayHomeAsUpEnabled(true)
+            setHomeButtonEnabled(true)
+            title = "Choose skills"
         }
     }
 

@@ -11,6 +11,7 @@ android {
         targetSdkVersion 28
         versionCode 1
         versionName "1.0"
+        vectorDrawables.useSupportLibrary = true
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -33,23 +34,26 @@ dependencies {
     testImplementation 'junit:junit:4.12'
 
     //Espresso UI Testing
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0-alpha4'
-    androidTestImplementation 'androidx.test.espresso:espresso-contrib:3.1.0-alpha4'
-    androidTestImplementation 'androidx.test.espresso:espresso-intents:3.1.0-alpha4'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
+    androidTestImplementation 'androidx.test.espresso:espresso-contrib:3.1.1'
+    androidTestImplementation 'androidx.test.espresso:espresso-intents:3.1.1'
 
     //Kotlin
-    implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.2.51'
-    implementation 'org.jetbrains.kotlin:kotlin-reflect:1.2.51'
+    implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.3.11'
+    implementation 'org.jetbrains.kotlin:kotlin-reflect:1.3.11'
 
-    implementation 'androidx.appcompat:appcompat:1.0.0-rc02'
-    implementation 'androidx.recyclerview:recyclerview:1.0.0-rc02'
+    implementation 'androidx.appcompat:appcompat:1.1.0-alpha01'
+    implementation 'androidx.recyclerview:recyclerview:1.1.0-alpha01'
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
 
+    //Google
+    implementation 'com.google.android.material:material:1.1.0-alpha02'
+
     //FlexibleAdapter - https://github.com/davideas/FlexibleAdapter
-    implementation 'eu.davidea:flexible-adapter:5.0.5'
-    implementation 'eu.davidea:flexible-adapter-ui:1.0.0-b5'
+    implementation 'eu.davidea:flexible-adapter:5.1.0'
+    implementation 'eu.davidea:flexible-adapter-ui:1.0.0'
     implementation 'eu.davidea:flexible-adapter-livedata:1.0.0-b2'
-    implementation 'eu.davidea:flexible-adapter-databinding:1.0.0-b3'
+    implementation 'eu.davidea:flexible-adapter-databinding:1.0.0'
 
     implementation 'com.jakewharton.timber:timber:4.7.1'
 }
