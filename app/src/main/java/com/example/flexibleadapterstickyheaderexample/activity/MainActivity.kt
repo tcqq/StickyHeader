@@ -53,8 +53,8 @@ class MainActivity : AppCompatActivity(),
 
     override fun onItemClick(view: View?, position: Int): Boolean {
         if (adapter.getItem(position) is SimpleHeaderItem) {
-            val viewHolder = recycler_view.findViewHolderForAdapterPosition(position) as SimpleHeaderItem.ViewHolder
-            viewHolder.apply {
+            val viewHolder = recycler_view.findViewHolderForAdapterPosition(position) as SimpleHeaderItem.ViewHolder?
+            viewHolder?.apply {
                 val context = itemView.context
                 if (adapter.isExpanded(position)) {
                     actionIcon.setImageResource(R.drawable.ic_keyboard_arrow_up_black_24dp)
