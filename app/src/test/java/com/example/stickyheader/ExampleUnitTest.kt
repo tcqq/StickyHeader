@@ -1,4 +1,4 @@
-package com.example.flexibleadapterstickyheaderexample
+package com.example.stickyheader
 
 import org.junit.Test
 

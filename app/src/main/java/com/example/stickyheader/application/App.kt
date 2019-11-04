@@ -1,7 +1,7 @@
-package com.example.flexibleadapterstickyheaderexample.application
+package com.example.stickyheader.application
 
 import android.app.Application
-import com.example.flexibleadapterstickyheaderexample.BuildConfig
+import com.example.stickyheader.BuildConfig
 import timber.log.Timber
 
 /**

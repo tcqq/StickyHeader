@@ -4,11 +4,11 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 
 android {
-    compileSdkVersion 28
+    compileSdkVersion 29
     defaultConfig {
-        applicationId "com.example.flexibleadapterstickyheaderexample"
+        applicationId "com.example.stickyheader"
         minSdkVersion 17
-        targetSdkVersion 28
+        targetSdkVersion 29
         versionCode 1
         versionName "1.0"
         vectorDrawables.useSupportLibrary = true
@@ -29,25 +29,35 @@ android {
     }
 }
 
+tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).all {
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+}
+
 dependencies {
     //Java Testing
     testImplementation 'junit:junit:4.12'
 
     //Espresso UI Testing
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
-    androidTestImplementation 'androidx.test.espresso:espresso-contrib:3.1.1'
-    androidTestImplementation 'androidx.test.espresso:espresso-intents:3.1.1'
-
-    //Kotlin
-    implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.3.11'
-    implementation 'org.jetbrains.kotlin:kotlin-reflect:1.3.11'
-
-    implementation 'androidx.appcompat:appcompat:1.1.0-alpha01'
-    implementation 'androidx.recyclerview:recyclerview:1.1.0-alpha01'
-    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-contrib:3.2.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-intents:3.2.0'
 
     //Google
-    implementation 'com.google.android.material:material:1.1.0-alpha02'
+    implementation 'com.google.android.material:material:1.2.0-alpha01'
+
+    //Kotlin
+    implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.3.50'
+    implementation 'org.jetbrains.kotlin:kotlin-reflect:1.3.50'
+
+    //Android X
+    implementation 'androidx.appcompat:appcompat:1.1.0'
+    implementation 'androidx.recyclerview:recyclerview:1.1.0-rc01'
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+
+    //Android KTX - https://developer.android.com/kotlin/ktx#ktx
+    implementation 'androidx.core:core-ktx:1.2.0-beta01'
 
     //FlexibleAdapter - https://github.com/davideas/FlexibleAdapter
     implementation 'eu.davidea:flexible-adapter:5.1.0'

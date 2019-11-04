@@ -1,24 +1,26 @@
-package com.example.flexibleadapterstickyheaderexample.utils
+package com.example.stickyheader.utils
 
 import android.content.Context
 import android.util.TypedValue
+import androidx.annotation.AttrRes
 import androidx.annotation.ColorInt
-
+import androidx.annotation.NonNull
 
 /**
- * @author Alan Dreamer
+ * @author Alan Perry
  * @since 2018/07/22 Created
  */
-object ThemeUtils {
+object ColorUtils {
 
-    fun getThemeValue(resId: Int, context: Context): Int {
+    @ColorInt
+    fun getThemeColor(@AttrRes attrResId: Int, @NonNull context: Context): Int {
         val value = TypedValue()
-        context.theme.resolveAttribute(resId, value, true)
+        context.theme.resolveAttribute(attrResId, value, true)
         return value.data
     }
 
     @ColorInt
-    fun getPrimaryTextColor(context: Context): Int {
+    fun getTextColorPrimary(@NonNull context: Context): Int {
         // Get the primary text color of the theme
         val typedValue = TypedValue()
         val theme = context.theme
